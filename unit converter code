@@ -1,0 +1,66 @@
+
+def main():
+    volume_units = {
+        "m3": 1,  # base unit
+        "l": 1e3,  # 1,000 liters
+        "cm3": 1e6,  # 1,000,000 cubic centimeters
+        "gallons": 264.172  # US liquid gallons
+    }
+    mass_units = {
+        'g': 1,  # base unit: all other units are in comparison to...
+        'kg': 1 / 1000,
+        't': 1 / 1000000,
+        'lbs': 0.0022046
+    }
+
+    # main converter menu
+    while True:
+        categories= {
+            1:("Volume", volume_units),
+            2:("Mass", mass_units)
+        }
+        print("==categories available==")
+        for key,(name,_) in categories.items():
+            print(f"{key}:{name}")
+        print()
+        choice = input("\nEnter choice (1-2 or q):").strip().lower()
+
+        if choice == "q":
+            print("Goodbye")
+        break
+
+        #Dynamic menu
+    choice = int(choice)
+
+    category_name, units = categories[choice]
+    print(f" \n---{category_name} converter--- \n")
+
+    def converter(units,from_value, value, to_value):
+
+        base_value = value / units[from_value]
+
+        result=base_value * units[to_value]
+
+        print(f"{value} {from_value} = {result:.4} {to_value}")
+
+
+    while True:
+
+        print(f"{category_name} units available for conversion: ")
+        for item, unit_name in enumerate(units.keys(), 1):
+            print(f"{item}) {unit_name}")
+        print()
+
+        from_value= input("What units would you like to convert from? ").strip()
+        to_value= input("What units would you like to convert to? ").strip()
+        value= float(input("Enter value for conversion "))
+        break
+
+
+    converter(units, from_value,value, to_value)
+
+if __name__ =="__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nProgram interrupted by user")
